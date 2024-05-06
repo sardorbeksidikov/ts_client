@@ -30,7 +30,7 @@ export const BannerCard = [
     title: "Tozalanmoqda",
   },
   {
-    count: "25 ta",
+    count: "222ta",
     title: "Olib ketildi",
   },
 ];

@@ -8,11 +8,11 @@ const useAuthStore = create<Config>((set) => ({
   loginData: <UserInfoT>{},
   forgotPasswordData: "",
   forgotPasswordVerifyData: "",
-  loading: false,
+  
   error: "",
   // register
   register: async (user) => {
-    set({ loading: true });
+    
     try {
       const res = await axios.post(
         "https://app.olimjanov.uz/v1/auth/register",
@@ -22,13 +22,11 @@ const useAuthStore = create<Config>((set) => ({
       set({ registerData: data.message, error: "" });
     } catch (error) {
       set({ error: error });
-    } finally {
-      set({ loading: false });
-    }
+    } 
   },
   //verify
   verify: async (user) => {
-    set({ loading: true });
+    
     try {
       const res = await axios.post(
         "https://app.olimjanov.uz/v1/auth/verify",
@@ -38,13 +36,12 @@ const useAuthStore = create<Config>((set) => ({
       set({ verifyData: data, error: "" });
     } catch (error) {
       console.log("error", error);
-    } finally {
-      set({ loading: false });
-    }
+    } 
+    
   },
   // login
   login: async (user) => {
-    set({ loading: true });
+  
     try {
       const res = await axios.post(
         "https://app.olimjanov.uz/v1/auth/login",
@@ -55,13 +52,11 @@ const useAuthStore = create<Config>((set) => ({
     } catch (error) {
       console.log("error", error);
       set({ error: error });
-    } finally {
-      set({ loading: false });
-    }
+    } 
   },
   // forgotPassword
   forgotPassword: async (user) => {
-    set({ loading: true });
+   
     try {
       const res = await axios.post(
         "https://app.olimjanov.uz/v1/auth/forgot-password",
@@ -74,13 +69,11 @@ const useAuthStore = create<Config>((set) => ({
     } catch (error) {
       console.log("error", error);
       set({ error: error });
-    } finally {
-      set({ loading: false });
-    }
+    } 
   },
   // forgotPasswordVerify
   forgotPasswordVerify: async (user) => {
-    set({ loading: true });
+    
     try {
       const res = await axios.post(
         "https://app.olimjanov.uz/v1/auth/verify-forgot-password",
@@ -92,9 +85,7 @@ const useAuthStore = create<Config>((set) => ({
     } catch (error) {
       console.log("error", error);
       set({ error: error });
-    } finally {
-      set({ loading: false });
-    }
+    } 
   },
 }));
 

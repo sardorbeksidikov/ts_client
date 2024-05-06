@@ -8,7 +8,6 @@ import Settings from "./pages/settings";
 import Servece from "./pages/service";
 import Login from "./pages/login";
 
-import ForgotPassword from "./pages/forgot-password";
 
 
 
@@ -25,8 +24,7 @@ const App = () => {
           <Route path="/service" element={<Servece />} />
         </Route>
         <Route path="/login" element={<Login />} />
-       
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+
       
       </Routes>
     </>
