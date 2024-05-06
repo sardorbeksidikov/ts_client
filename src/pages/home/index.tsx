@@ -1,47 +1,69 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
-import { useState } from "react";
-import Footer from "./Footer";
-import Main from "./Main";
-import { ChildrenType } from "./Home.type";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { BannerCard, Cards } from "../../db/card";
+import Card from "../../components/shared/card/card";
+import "./index.scss";
+import { ChakraProvider, Heading, Text } from "@chakra-ui/react";
+import { Dropdown, Space } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+const Home = () => {
+  const root = useNavigate();
+  const [text, seTtext] = useState("Oylik");
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+  useEffect(() => {
+    const user = localStorage.getItem("tokenData");
+    if (!user) {
+      return root("/login");
+    }
+  }, []);
 
-const Layout = ({ children }: ChildrenType) => {
-  const [open, setOpen] = useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
+  const items = [
+    {
+      label: "Oylik",
+      key: "Oylik",
+    },
+    {
+      label: "Haftalik",
+      key: "Haftalik",
+    },
+    {
+      label: "Kunlik",
+      key: "Kunlik",
+    },
+  ];
+
+  const onClick = ({ key }: { key: string }) => {
+    seTtext(key);
   };
+
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        <Header open={open} toggleDrawer={toggleDrawer} />
-        <Sidebar open={open} toggleDrawer={toggleDrawer} />
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: "100vh",
-            overflow: "auto",
-          }}
-        >
-          <Toolbar />
-          <Main>{children}</Main>
-          <Footer />
-        </Box>
-      </Box>
-    </ThemeProvider>
+    <ChakraProvider>
+      <div className="hom_cards">
+        {Cards.map((item, index) => (
+          <Card key={index} {...item} />
+        ))}
+      </div>
+      <div className="banner_cards">
+        <div className="banner_title">
+          <Heading>Buyurtmalar</Heading>
+          <Dropdown menu={{ items, onClick }}>
+            <Space style={{ cursor: "pointer" }}>
+              <Text fontSize={"20px"}>{text}</Text>
+              <DownOutlined />
+            </Space>
+          </Dropdown>
+        </div>
+        <div className="banner_cards_w">
+          {BannerCard.map((item, index) => (
+            <div className="banner_card" key={index}>
+              <Text fontSize={"2xl"}>{item?.title}</Text>
+              <Heading>{item.count}</Heading>
+            </div>
+          ))}
+        </div>
+      </div>
+    </ChakraProvider>
   );
 };
 
-export default Layout;
+export default Home;
