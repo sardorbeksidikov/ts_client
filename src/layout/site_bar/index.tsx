@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
-import { IoSettingsOutline, IoWaterOutline } from "react-icons/io5";
+import { IoSettingsOutline } from "react-icons/io5";
 import { LiaCartArrowDownSolid } from "react-icons/lia";
 import { GrUserSettings } from "react-icons/gr";
 import { SiteBarProps } from "../../types";
@@ -59,7 +59,7 @@ const SiteBar: FC<SiteBarProps> = ({ state }) => {
         >
           <div className="demo-logo-vertical" />
           <div className={`logo ${state.collapsed ? "active" : ""}`}>
-            <IoWaterOutline size={55} color="dark" />
+            
             <Text fontSize={"3xl"}>
              
             </Text>
