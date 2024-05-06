@@ -6,9 +6,6 @@ const useAuthStore = create<Config>((set) => ({
   registerData: "",
   verifyData: <UserInfoT>{},
   loginData: <UserInfoT>{},
-  forgotPasswordData: "",
-  forgotPasswordVerifyData: "",
-  
   error: "",
   // register
   register: async (user) => {
@@ -49,39 +46,6 @@ const useAuthStore = create<Config>((set) => ({
       );
       const data = await res.data;
       set({ loginData: data, error: "" });
-    } catch (error) {
-      console.log("error", error);
-      set({ error: error });
-    } 
-  },
-  // forgotPassword
-  forgotPassword: async (user) => {
-   
-    try {
-      const res = await axios.post(
-        "https://app.olimjanov.uz/v1/auth/forgot-password",
-        user
-      );
-      const data = await res.data;
-      console.log(res);
-
-      set({ forgotPasswordData: data.message, error: "" });
-    } catch (error) {
-      console.log("error", error);
-      set({ error: error });
-    } 
-  },
-  // forgotPasswordVerify
-  forgotPasswordVerify: async (user) => {
-    
-    try {
-      const res = await axios.post(
-        "https://app.olimjanov.uz/v1/auth/verify-forgot-password",
-        user
-      );
-      const data = await res.data;
-      console.log(data);
-      set({ forgotPasswordVerifyData: data.message, error: "" });
     } catch (error) {
       console.log("error", error);
       set({ error: error });

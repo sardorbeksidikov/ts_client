@@ -25,29 +25,16 @@ export interface UserInfoT {
   phone_number: string;
 }
 
-export interface ForgotPasswordT {
-  email: string;
-}
 
-export interface ForgotPasswordVerify {
-  email: string;
-  code: string;
-  new_password: string;
-}
 
 export interface Config {
   registerData: string;
   verifyData: UserInfoT;
   loginData: UserInfoT;
-  forgotPasswordData: string;
-  forgotPasswordVerifyData: string;
-  
   error: any;
   register: (user: UserT) => Promise<void>;
   verify: (user: UserVerifyT) => Promise<void>;
   login: (user: UserLoginT) => Promise<void>;
-  forgotPassword: (user: ForgotPasswordT) => Promise<void>;
-  forgotPasswordVerify: (user: ForgotPasswordVerify) => Promise<void>;
 }
 
 // card information
